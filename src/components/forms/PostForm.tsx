@@ -33,7 +33,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
   const form = useForm<z.infer<typeof PostValidation>>({
     resolver: zodResolver(PostValidation),
     defaultValues: {
-      caption: post ? post?.caption : "",
+      caption: post ? post.caption : "",
       file: [],
       location: post ? post.location : "",
       tags: post ? post.tags.join(",") : "",
@@ -174,3 +174,6 @@ const PostForm = ({ post, action }: PostFormProps) => {
 };
 
 export default PostForm;
+
+
+
