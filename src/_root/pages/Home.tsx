@@ -12,6 +12,7 @@ const Home = () => {
     isLoading: isPostLoading,
     isError: isErrorPosts,
   } = useGetRecentPosts();
+  
   const {
     data: creators,
     isLoading: isUserLoading,
