@@ -545,5 +545,3 @@ export async function updateUser(user: IUpdateUser) {
   }
 }
 
-
-
