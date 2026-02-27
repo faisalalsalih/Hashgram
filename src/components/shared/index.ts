@@ -5,5 +5,5 @@ export { default as LeftSidebar } from "./LeftSidebar";
 export { default as TopBar } from "./TopBar";
 export { default as FormUploader } from "./FormUploader";
 export { default as PostStats } from "./PostStats";
-
+export { default as GridPostList } from "./GridPostList";
 
