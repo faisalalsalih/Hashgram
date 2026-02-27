@@ -10,15 +10,16 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
-  Button,
-  Input,
-  Textarea,
-} from "@/components/ui";
+  FormMessage
+} from "@/components/ui/form";
 import { PostValidation } from "@/lib/validation";
 import { useToast } from "@/components/ui/use-toast";
 import { useUserContext } from "@/context/AuthContext";
-import { FileUploader, Loader } from "@/components/shared";
+import FileUploader from "@/components/shared/FileUploader";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import Loader from "@/components/shared/Loader";
 import { useCreatePost, useUpdatePost } from "@/lib/react-query/queriesandMutations";
 
 type PostFormProps = {
