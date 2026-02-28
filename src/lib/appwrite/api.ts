@@ -96,8 +96,9 @@ export async function getCurrentUser() {
     if (!currentUser) throw Error;
 
     return currentUser.documents[0];
+    
   } catch (error) {
-    console.log(error);
+    console.log("Failed to fetch the current user at line 100 in api.ts",error);
     return null;
   }
 }

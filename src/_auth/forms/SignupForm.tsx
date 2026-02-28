@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Loader from "@/components/shared/Loader";
+import  Loader from "@/components/shared/Loader";
 import { useToast } from "@/components/ui/use-toast";
 
 import { useCreateUserAccount, useSignInAccount } from "@/lib/react-query/queriesandMutations";
@@ -16,11 +16,8 @@ import { useUserContext } from "@/context/AuthContext";
 const SignupForm = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
-
-  // Functions from the context
   const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
 
-  // Form Structure is here
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
     defaultValues: {
@@ -84,7 +81,7 @@ const SignupForm = () => {
           Create a new account
         </h2>
         <p className="text-light-3 small-medium md:base-regular mt-2">
-          To use Hashgram, Please enter your details
+          To use snapgram, Please enter your details
         </p>
 
         <form
@@ -171,5 +168,4 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
-
 

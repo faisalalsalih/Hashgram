@@ -52,4 +52,3 @@ const GridPostList = ({
 };
 
 export default GridPostList;
-

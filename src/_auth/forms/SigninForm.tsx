@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import Loader from "@/components/shared/Loader";
 import { useToast } from "@/components/ui/use-toast";
 
-import { SignInValidation } from "@/lib/validation";
+import { SigninValidation } from "@/lib/validation";
 import { useSignInAccount } from "@/lib/react-query/queriesandMutations";
 import { useUserContext } from "@/context/AuthContext";
 
@@ -21,15 +21,15 @@ const SigninForm = () => {
   // Query
   const { mutateAsync: signInAccount, isLoading } = useSignInAccount();
 
-  const form = useForm<z.infer<typeof SignInValidation>>({
-    resolver: zodResolver(SignInValidation),
+  const form = useForm<z.infer<typeof SigninValidation>>({
+    resolver: zodResolver(SigninValidation),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  const handleSignin = async (user: z.infer<typeof SignInValidation>) => {
+  const handleSignin = async (user: z.infer<typeof SigninValidation>) => {
     const session = await signInAccount(user);
 
     if (!session) {
@@ -118,5 +118,3 @@ const SigninForm = () => {
 };
 
 export default SigninForm;
-
-
