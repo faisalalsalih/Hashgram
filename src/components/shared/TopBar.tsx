@@ -1,18 +1,35 @@
 import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 
 import { Button } from "../ui/button";
 import { useUserContext } from "@/context/AuthContext";
 import { useSignOutAccount } from "@/lib/react-query/queriesandMutations";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Topbar = () => {
   const navigate = useNavigate();
-  const { user } = useUserContext();
+  const { user, setUser } = useUserContext();
   const { mutate: signOut, isSuccess } = useSignOutAccount();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
-    if (isSuccess) navigate(0);
-  }, [isSuccess]);
+    if (isSuccess){
+
+      queryClient.clear();
+
+      setUser({
+        id: "",
+        name: "",
+        username: "",
+        email: "",
+        imageUrl: "",
+        bio: "",
+      });
+
+      navigate("/sign-in");
+
+    };
+  }, [isSuccess, queryClient, navigate, setUser]);
 
   return (
     <section className="topbar">
