@@ -70,11 +70,20 @@ export async function signInAccount(user: { email: string; password: string }) {
 }
 
 // ============================== GET ACCOUNT
+export async function getAccount() {
+  try {
+    const currentAccount = await account.get();
+
+    return currentAccount;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // ============================== GET USER
 export async function getCurrentUser() {
   try {
-    const currentAccount = await account.get();
+    const currentAccount = await getAccount();
 
     if (!currentAccount) throw Error;
 
@@ -87,9 +96,8 @@ export async function getCurrentUser() {
     if (!currentUser) throw Error;
 
     return currentUser.documents[0];
-    
   } catch (error) {
-    console.log("Failed to fetch the current user at line 100 in api.ts",error);
+    console.log(error);
     return null;
   }
 }
@@ -130,7 +138,7 @@ export async function createPost(post: INewPost) {
     // Create post
     const newPost = await databases.createDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.postsCollectionId,
+      appwriteConfig.postCollectionId,
       ID.unique(),
       {
         creator: post.userId,
@@ -204,7 +212,7 @@ export async function searchPosts(searchTerm: string) {
   try {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,
-      appwriteConfig.postsCollectionId,
+      appwriteConfig.postCollectionId,
       [Query.search("caption", searchTerm)]
     );
 
@@ -226,7 +234,7 @@ export async function getInfinitePosts({ pageParam }: { pageParam: number }) {
   try {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,
-      appwriteConfig.postsCollectionId,
+      appwriteConfig.postCollectionId,
       queries
     );
 
@@ -245,7 +253,7 @@ export async function getPostById(postId?: string) {
   try {
     const post = await databases.getDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.postsCollectionId,
+      appwriteConfig.postCollectionId,
       postId
     );
 
@@ -288,7 +296,7 @@ export async function updatePost(post: IUpdatePost) {
     //  Update post
     const updatedPost = await databases.updateDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.postsCollectionId,
+      appwriteConfig.postCollectionId,
       post.postId,
       {
         caption: post.caption,
@@ -328,7 +336,7 @@ export async function deletePost(postId?: string, imageId?: string) {
   try {
     const statusCode = await databases.deleteDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.postsCollectionId,
+      appwriteConfig.postCollectionId,
       postId
     );
 
@@ -347,7 +355,7 @@ export async function likePost(postId: string, likesArray: string[]) {
   try {
     const updatedPost = await databases.updateDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.postsCollectionId,
+      appwriteConfig.postCollectionId,
       postId,
       {
         likes: likesArray,
@@ -406,7 +414,7 @@ export async function getUserPosts(userId?: string) {
   try {
     const post = await databases.listDocuments(
       appwriteConfig.databaseId,
-      appwriteConfig.postsCollectionId,
+      appwriteConfig.postCollectionId,
       [Query.equal("creator", userId), Query.orderDesc("$createdAt")]
     );
 
@@ -423,7 +431,7 @@ export async function getRecentPosts() {
   try {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,
-      appwriteConfig.postsCollectionId,
+      appwriteConfig.postCollectionId,
       [Query.orderDesc("$createdAt"), Query.limit(20)]
     );
 
@@ -536,4 +544,3 @@ export async function updateUser(user: IUpdateUser) {
     console.log(error);
   }
 }
-
