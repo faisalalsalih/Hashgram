@@ -6,6 +6,7 @@ import { Loader } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { useSignOutAccount } from "@/lib/react-query/queriesandMutations";
 import { useUserContext, INITIAL_USER } from "@/context/AuthContext";
+import Logo from "./Logo";
 
 const LeftSidebar = () => {
   const navigate = useNavigate();
@@ -28,12 +29,7 @@ const LeftSidebar = () => {
     <nav className="leftsidebar">
       <div className="flex flex-col gap-11">
         <Link to="/" className="flex gap-3 items-center">
-          <img
-            src="/assets/images/logo.svg"
-            alt="logo"
-            width={170}
-            height={36}
-          />
+          <Logo />
         </Link>
 
         {isLoading || !user.email ? (
