@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import { useUserContext } from "@/context/AuthContext";
 import { useSignOutAccount } from "@/lib/react-query/queriesandMutations";
 import { useQueryClient } from "@tanstack/react-query";
+import Logo from "./Logo";
 
 const Topbar = () => {
   const navigate = useNavigate();
@@ -35,12 +36,7 @@ const Topbar = () => {
     <section className="topbar">
       <div className="flex-between py-4 px-5">
         <Link to="/" className="flex gap-3 items-center">
-          <img
-            src="/assets/images/logo.svg"
-            alt="logo"
-            width={130}
-            height={325}
-          />
+          <Logo image="w-12 h-12 max-sm:w-10 max-sm:h-10 max-sm:-mb-5 max-[400px]:w-7 max-[400px]:h-7 max-[310px]:-mr-2" paragraph="max-sm:text-2xl max-sm:-mb-5 max-[400px]:w-7 max-[400px]:h-7 max-[310px]:-mr-2"/>
         </Link>
 
         <div className="flex gap-4">
