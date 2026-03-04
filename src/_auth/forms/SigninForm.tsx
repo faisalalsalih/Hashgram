@@ -60,9 +60,11 @@ const SigninForm = () => {
         <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">
           Log in to your account
         </h2>
+
         <p className="text-light-3 small-medium md:base-regular mt-2">
-          Welcome back! Please enter your details.
+          Welcome Back ! Please Enter Your Details.
         </p>
+        
         <form
           onSubmit={form.handleSubmit(handleSignin)}
           className="flex flex-col gap-5 w-full mt-4">
@@ -73,7 +75,7 @@ const SigninForm = () => {
               <FormItem>
                 <FormLabel className="shad-form_label">Email</FormLabel>
                 <FormControl>
-                  <Input type="text" className="shad-input" {...field} />
+                  <Input type="text" className="shad-input"  {...field} placeholder="Enter email" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -87,7 +89,7 @@ const SigninForm = () => {
               <FormItem>
                 <FormLabel className="shad-form_label">Password</FormLabel>
                 <FormControl>
-                  <Input type="password" className="shad-input" {...field} />
+                  <Input type="password" className="shad-input" {...field} placeholder="Enter password"/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
