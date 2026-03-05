@@ -18,8 +18,12 @@ import SigninForm from "@/_auth/forms/SigninForm";
 import { Toaster } from "@/components/ui/toaster";
 
 import "./index.css";
+import usePageTitle from "./hooks/usePageTitle";
 
 const App = () => {
+
+  usePageTitle();
+  
   return (
     <main className="flex h-screen">
       <Routes>
