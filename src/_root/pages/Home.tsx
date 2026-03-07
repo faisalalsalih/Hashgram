@@ -12,6 +12,7 @@ const Home = () => {
     isLoading: isPostLoading,
     isError: isErrorPosts,
   } = useGetRecentPosts();
+
   const {
     data: creators,
     isLoading: isUserLoading,
@@ -33,7 +34,9 @@ const Home = () => {
 
   return (
     <div className="flex flex-1">
+      {/* Home Container */}
       <div className="home-container">
+
         <div className="home-posts">
           <h2 className="h3-bold md:h2-bold text-left w-full">Home Feed</h2>
           {isPostLoading && !posts ? (
@@ -48,8 +51,10 @@ const Home = () => {
             </ul>
           )}
         </div>
+        
       </div>
 
+      {/* Home Creators */}
       <div className="home-creators">
         <h3 className="h3-bold text-light-1">Top Creators</h3>
         {isUserLoading && !creators ? (
