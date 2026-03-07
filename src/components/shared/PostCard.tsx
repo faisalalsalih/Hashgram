@@ -47,6 +47,7 @@ const PostCard = ({ post }: PostCardProps) => {
           </div>
         </div>
 
+        {/* Edit Icon Functionality is here  */}
         <Link
           to={`/update-post/${post.$id}`}
           className={`${user.id !== post.creator.$id && "hidden"}`}>
@@ -57,6 +58,8 @@ const PostCard = ({ post }: PostCardProps) => {
             height={20}
           />
         </Link>
+
+        
       </div>
 
       <Link to={`/posts/${post.$id}`}>

@@ -141,7 +141,9 @@ export const useDeletePost = () => {
 };
 
 export const useLikePost = () => {
+
   const queryClient = useQueryClient();
+  
   return useMutation({
     mutationFn: ({
       postId,
