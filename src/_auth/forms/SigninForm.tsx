@@ -16,7 +16,6 @@ import Logo from "@/components/shared/Logo";
 
 const SigninForm = () => {
   const { toast } = useToast();
-  const navigate = useNavigate();
   const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
 
   // Query
@@ -43,8 +42,6 @@ const SigninForm = () => {
 
     if (isLoggedIn) {
       form.reset();
-
-      navigate("/");
     } else {
       toast({ title: "Login failed. Please try again.", });
       

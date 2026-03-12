@@ -61,9 +61,9 @@ const SignupForm = () => {
       const isLoggedIn = await checkAuthUser();
 
       if (isLoggedIn) {
+
         form.reset();
 
-        navigate("/");
       } else {
         toast({ title: "Login failed. Please try again.", });
         
@@ -80,12 +80,14 @@ const SignupForm = () => {
         
         <Logo />
 
-        <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">
+        <h2 className="h3-bold md:h2-bold pt-3 sm:pt-4">
           Create a new account
         </h2>
+
         <p className="text-light-3 small-medium md:base-regular mt-2">
           To use Hashgram, Please Enter your details
         </p>
+
 
         <form
           onSubmit={form.handleSubmit(handleSignup)}
