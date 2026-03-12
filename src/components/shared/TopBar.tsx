@@ -27,7 +27,7 @@ const Topbar = () => {
         bio: "",
       });
 
-      navigate("/sign-in");
+      navigate("/sign-up");
 
     };
   }, [isSuccess, queryClient, navigate, setUser]);

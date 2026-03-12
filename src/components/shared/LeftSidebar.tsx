@@ -26,12 +26,19 @@ const LeftSidebar = () => {
   };
 
   return (
+
+    // Nav of Leftsidebar that contain two big divs
     <nav className="leftsidebar">
-      <div className="flex flex-col gap-11">
+
+      <div className="flex flex-col gap-10">
+
+        {/* First Logic */}
         <Link to="/" className="flex gap-3 items-center">
           <Logo />
         </Link>
 
+
+        {/* Second Logic */}
         {isLoading || !user.email ? (
           <div className="h-14">
             <Loader />
@@ -50,8 +57,10 @@ const LeftSidebar = () => {
           </Link>
         )}
 
+        {/* Third Logic */}
         <ul className="flex flex-col gap-6">
           {sidebarLinks.map((link: INavLink) => {
+
             const isActive = pathname === link.route;
 
             return (
@@ -78,6 +87,7 @@ const LeftSidebar = () => {
         </ul>
       </div>
 
+      {/* Last Logout Button */}
       <Button
         variant="ghost"
         className="shad-button_ghost"
@@ -85,6 +95,8 @@ const LeftSidebar = () => {
         <img src="/assets/icons/logout.svg" alt="logout" />
         <p className="small-medium lg:base-medium">Logout</p>
       </Button>
+
+
     </nav>
   );
 };

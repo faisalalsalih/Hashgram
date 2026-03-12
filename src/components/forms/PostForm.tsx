@@ -38,8 +38,8 @@ const PostForm = ({ post, action }: PostFormProps) => {
     defaultValues: {
       caption: post ? post?.caption : "",
       file: [],
-      location: post ? post.location : "",
-      tags: post ? post.tags.join(",") : "",
+      location: post ? post?.location : "",
+      tags: post ? post?.tags.join(",") : "",
     },
   });
 
@@ -84,9 +84,15 @@ const PostForm = ({ post, action }: PostFormProps) => {
 
   return (
     <Form {...form}>
+
+      {/* Actual form */}
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
         className="flex flex-col gap-9 w-full  max-w-5xl">
+
+
+          {/* Caption */}
+
         <FormField
           control={form.control}
           name="caption"
@@ -103,6 +109,8 @@ const PostForm = ({ post, action }: PostFormProps) => {
             </FormItem>
           )}
         />
+
+        {/* File Uploader */}
 
         <FormField
           control={form.control}
@@ -121,6 +129,8 @@ const PostForm = ({ post, action }: PostFormProps) => {
           )}
         />
 
+        {/* Location */}
+
         <FormField
           control={form.control}
           name="location"
@@ -134,6 +144,8 @@ const PostForm = ({ post, action }: PostFormProps) => {
             </FormItem>
           )}
         />
+
+        {/* Tags */}
 
         <FormField
           control={form.control}
@@ -156,6 +168,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
           )}
         />
 
+        {/* Last Submit Button Group */}
         <div className="flex gap-4 items-center justify-end">
           <Button
             type="button"
@@ -171,6 +184,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
             {action} Post
           </Button>
         </div>
+
       </form>
     </Form>
   );
