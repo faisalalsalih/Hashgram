@@ -1,8 +1,9 @@
 import { useCallback, useState } from "react";
 import { FileWithPath, useDropzone } from "react-dropzone";
-
 import { Button } from "@/components/ui/button";
 import { convertFileToUrl } from "@/lib/utils";
+
+
 
 type FileUploaderProps = {
   fieldChange: (files: File[]) => void;
@@ -10,8 +11,11 @@ type FileUploaderProps = {
 };
 
 const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
+
+  // State to managed the fileUrl
   const [fileUrl, setFileUrl] = useState<string>(mediaUrl);
 
+  // OnDrop Functionality 
   const onDrop = useCallback(
     (acceptedFiles: FileWithPath[]) => {
       fieldChange(acceptedFiles);
@@ -20,6 +24,7 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
     []
   );
 
+  // Main Code of Handling Drag and Drop 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: {
@@ -29,8 +34,11 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
 
   return (
     <div
+    // Drag and Drop Functionality is Here
       {...getRootProps()}
       className="flex flex-center flex-col bg-dark-3 rounded-xl cursor-pointer">
+
+        {/* Input To Handle Custom Selection of the file without drag and drop */}
       <input {...getInputProps()} className="cursor-pointer" />
 
       {fileUrl ? (
@@ -52,6 +60,7 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
           <h3 className="base-medium text-light-2 mb-2 mt-6">
             Drag photo here
           </h3>
+          
           <p className="text-light-4 small-regular mb-6">SVG, PNG, JPG</p>
 
           <Button type="button" className="shad-button_dark_4">
@@ -64,3 +73,4 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
 };
 
 export default FileUploader;
+

@@ -1,17 +1,20 @@
 import { Models } from "appwrite";
-
-// import { useToast } from "@/components/ui/use-toast";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 import { Loader, PostCard, UserCard } from "@/components/shared";
-import { useGetRecentPosts, useGetUsers } from "@/lib/react-query/queriesandMutations";
+import { useGetPosts, useGetUsers } from "@/lib/react-query/queriesandMutations";
 
 const Home = () => {
-  // const { toast } = useToast();
+  const { ref, inView } = useInView();
 
+  // 1. Using the infinite query hook
   const {
     data: posts,
+    fetchNextPage,
+    hasNextPage,
     isLoading: isPostLoading,
     isError: isErrorPosts,
-  } = useGetRecentPosts();
+  } = useGetPosts();
 
   const {
     data: creators,
@@ -19,13 +22,17 @@ const Home = () => {
     isError: isErrorCreators,
   } = useGetUsers(10);
 
+  // 2. Trigger fetch when the bottom ref is in view
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage]);
+
   if (isErrorPosts || isErrorCreators) {
     return (
       <div className="flex flex-1">
         <div className="home-container">
-          <p className="body-medium text-light-1">Something bad happened</p>
-        </div>
-        <div className="home-creators">
           <p className="body-medium text-light-1">Something bad happened</p>
         </div>
       </div>
@@ -34,27 +41,34 @@ const Home = () => {
 
   return (
     <div className="flex flex-1">
-      {/* Home Container */}
       <div className="home-container">
-
         <div className="home-posts">
           <h2 className="h3-bold md:h2-bold text-left w-full">Home Feed</h2>
+          
           {isPostLoading && !posts ? (
             <Loader />
           ) : (
-            <ul className="flex flex-col flex-1 gap-9 w-full ">
-              {posts?.documents.map((post: Models.Document) => (
-                <li key={post.$id} className="flex justify-center w-full">
-                  <PostCard post={post} />
+            <ul className="flex flex-col flex-1 gap-9 w-full">
+              {/* 3. Mapping through the pages stored in the queryKey area */}
+              {posts?.pages.map((page, index) => (
+                <li key={`page-${index}`} className="flex flex-col gap-9 w-full">
+                  {page.documents.map((post: Models.Document) => (
+                    <PostCard key={post.$id} post={post} />
+                  ))}
                 </li>
               ))}
             </ul>
           )}
+
+          {/* 4. The "Trigger" element at the bottom */}
+          {hasNextPage && (
+            <div ref={ref} className="mt-10">
+              <Loader />
+            </div>
+          )}
         </div>
-        
       </div>
 
-      {/* Home Creators */}
       <div className="home-creators">
         <h3 className="h3-bold text-light-1">Top Creators</h3>
         {isUserLoading && !creators ? (
