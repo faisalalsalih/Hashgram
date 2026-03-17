@@ -2,12 +2,16 @@ import { Models } from "appwrite";
 import { Link } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
+import { useUserContext } from "@/context/AuthContext";
 
 type UserCardProps = {
   user: Models.Document;
 };
 
 const UserCard = ({ user }: UserCardProps) => {
+
+  const { user: loggedinuser } = useUserContext();
+
   return (
     <Link to={`/profile/${user.$id}`} className="user-card">
       <img
@@ -24,10 +28,16 @@ const UserCard = ({ user }: UserCardProps) => {
           @{user.username}
         </p>
       </div>
-
+      {loggedinuser.id !== user.$id ? (
       <Button type="button" size="sm" className="shad-button_primary px-5">
         Follow
       </Button>
+      ) : (
+        <Button type="button" size="sm" className="shad-button_primary px-5">
+        View Profile
+        </Button>
+      )
+      }
     </Link>
   );
 };

@@ -385,6 +385,7 @@ export async function savePost(userId: string, postId: string) {
     if (!updatedPost) throw Error;
 
     return updatedPost;
+    
   } catch (error) {
     console.log(error);
   }
@@ -401,6 +402,7 @@ export async function deleteSavedPost(savedRecordId: string) {
     if (!statusCode) throw Error;
 
     return { status: "Ok" };
+
   } catch (error) {
     console.log(error);
   }
@@ -467,6 +469,7 @@ export async function getUsers(limit?: number) {
   } catch (error) {
     console.log(error);
   }
+  
 }
 
 // ============================== GET USER BY ID
