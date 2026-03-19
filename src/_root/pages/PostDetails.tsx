@@ -34,6 +34,8 @@ const PostDetails = () => {
 
   return (
     <div className="post_details-container">
+
+      {/* Back Button Logic */}
       <div className="hidden md:flex max-w-5xl w-full">
         <Button
           onClick={() => navigate(-1)}
@@ -49,10 +51,13 @@ const PostDetails = () => {
         </Button>
       </div>
 
+
+      {/* Post Card Details and Loader */}
       {isLoading || !post ? (
         <Loader />
       ) : (
         <div className="post_details-card">
+
           <img
             src={post?.imageUrl}
             alt="creator"
@@ -139,6 +144,7 @@ const PostDetails = () => {
         </div>
       )}
 
+      {/* Related Post Area */}
       <div className="w-full max-w-5xl">
         <hr className="border w-full border-dark-4/80" />
 
@@ -151,8 +157,10 @@ const PostDetails = () => {
           <GridPostList posts={relatedPosts} />
         )}
       </div>
+
     </div>
   );
 };
 
 export default PostDetails;
+

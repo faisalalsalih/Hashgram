@@ -28,6 +28,7 @@ const UserCard = ({ user }: UserCardProps) => {
           @{user.username}
         </p>
       </div>
+      
       {loggedinuser.id !== user.$id ? (
       <Button type="button" size="sm" className="shad-button_primary px-5">
         Follow

@@ -247,6 +247,7 @@ export async function getInfinitePosts({ pageParam }: { pageParam: number }) {
 
 // ============================== GET POST BY ID
 export async function getPostById(postId?: string) {
+
   if (!postId) throw Error;
 
   try {
@@ -266,9 +267,11 @@ export async function getPostById(postId?: string) {
 
 // ============================== UPDATE POST
 export async function updatePost(post: IUpdatePost) {
+
   const hasFileToUpdate = post.file.length > 0;
 
   try {
+    
     let image = {
       imageUrl: post.imageUrl,
       imageId: post.imageId,
@@ -308,7 +311,10 @@ export async function updatePost(post: IUpdatePost) {
 
     // Failed to update
     if (!updatedPost) {
-      // Delete new file that has been recently uploaded
+      
+      // we double check that if a file is still to update so then delete that
+      // file which is uploaded recently to storage but not updated the post
+
       if (hasFileToUpdate) {
         await deleteFile(image.imageId);
       }

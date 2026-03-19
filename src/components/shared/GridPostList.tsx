@@ -15,6 +15,7 @@ const GridPostList = ({
   showUser = true,
   showStats = true,
 }: GridPostListProps) => {
+
   const { user } = useUserContext();
 
   return (
@@ -45,6 +46,7 @@ const GridPostList = ({
             )}
             {showStats && <PostStats post={post} userId={user.id} />}
           </div>
+          
         </li>
       ))}
     </ul>
